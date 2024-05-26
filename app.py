@@ -3,7 +3,7 @@ import requests
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(*)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 @app.route('/api/blenderData', methods=['GET'])
 def get_blender_data():
