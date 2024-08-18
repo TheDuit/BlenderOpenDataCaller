@@ -2,7 +2,7 @@ import requests
 import heapq
 import json
 from typing import List
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
 
 
 class Device(BaseModel):
@@ -11,6 +11,9 @@ class Device(BaseModel):
     score: float
     benchmarks: int
 
+    @validator('score', pre=True, always=True)
+    def format_float(cls, value):
+        return round(value, 2)
 
 class DeviceList(BaseModel):
     devicesCount: int
